@@ -1,0 +1,29 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[9]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin ArtCellGUI[0]
+{
+load_file("netbild.hoc")
+}
+ocbox_ = new ArtCellGUI(1)
+{object_push(ocbox_)}
+{
+tobj = new MechanismStandard("NetStim")
+tobj.set("interval", 100, 0)
+tobj.set("number", 100000, 0)
+tobj.set("start", 0, 0)
+tobj.set("noise", 0, 0)
+}
+{append(tobj, "Pre")}
+{object_pop()}
+{
+ocbox_.map("ArtCellGUI[0]", 6, 488, 449.28, 291.84)
+}
+objref ocbox_
+//End ArtCellGUI[0]
+
+{WindowMenu[0].ses_gid(1, 1, 1, "netstuff")}
+objectvar scene_vector_[1]
+{doNotify()}

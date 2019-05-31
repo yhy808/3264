@@ -1,0 +1,37 @@
+load_file("nrngui.hoc")
+load_file("testgroup.ses")
+load_file("runtest.ses")
+
+objref vbox
+vbox = new VBox()
+vbox.intercept(1)       //all following creations go into the "vbox" box
+xpanel("Comments")
+xlabel("'Biophysical' cell with multiple input streams")
+xlabel("Demonstration of efficient convergence and stream-specific use-dependent plasticity.")
+xlabel("In NEURON, multiple input streams ('spike trains') can share a single postsynaptic")
+xlabel("mechanism so that the conductance of the shared mechanism equals the total conductance")
+xlabel("that would have occurred if each input stream had its own separate mechanism.  This is")
+xlabel("computationally efficient because it means that only one set of equations has to be")
+xlabel("solved to find the net effect of any number of input streams.  Furthermore, the")
+xlabel("postsynaptic action of each input stream can show its own use-dependent plasticity.")
+xpanel()
+xpanel("Instructions")
+xlabel("Postsynaptic C0 carries three postsynaptic conductance mechanisms, called")
+xlabel("FDSExp2Syn[0], FDSExp2Syn[1], and FDSExp2Syn[2], that have identical biophysical")
+xlabel("properties, including short-term plasticity.")
+xlabel("Presynaptic Sfast1 fires at 100 ms intervals and drives FDSExp2Syn[0].")
+xlabel("Presynaptic Sslow2 fires half as fast and drives FDSExp2Syn[1].")
+xlabel("In addition, Sfast1 and Sslow2 both drive FDSExp2Syn[2].")
+xlabel("That is, FDSExp2Syn[2] receives convergent input streams from different sources.")
+xlabel("1.  Before examining the GUI tools used to make this net, run a simulation and")
+xlabel("    verify that the blue trace stays on top of the x axis.  This shows that")
+xlabel("    FDSExp2Syn[0].g + FDSExp2Syn[1].g - FDSExp2Syn[2].g = 0")
+xlabel("2.  For fastest results, be sure to use 'Local variable dt'")
+xlabel("    (see the VariableTimeStep window)")
+xlabel("3.  Use")
+xlabel("      NEURON Main Menu / Window / netstuff")
+xlabel("    to reveal the GUI for this demo's network")
+xpanel()
+vbox.intercept(0)       //ends intercept mode 
+vbox.map()              //draw the box and its contents
+

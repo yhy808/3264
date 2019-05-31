@@ -1,0 +1,53 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[6]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin ArtCellGUI[0]
+{
+load_file("netbild.hoc")
+}
+ocbox_ = new ArtCellGUI(1)
+{object_push(ocbox_)}
+{
+tobj = new MechanismStandard("FDSIntFire")
+tobj.set("tau", 10, 0)
+tobj.set("spikedur", 1, 0)
+tobj.set("refrac", 5, 0)
+tobj.set("f", 0.917, 0)
+tobj.set("tau_F", 94, 0)
+tobj.set("d1", 0.416, 0)
+tobj.set("tau_D1", 380, 0)
+tobj.set("d2", 0.975, 0)
+tobj.set("tau_D2", 9200, 0)
+}
+{append(tobj, "FDSIntFire")}
+{object_pop()}
+{
+ocbox_.map("ArtCellGUI[0]", 0, 105, 449.28, 291.84)
+}
+objref ocbox_
+//End ArtCellGUI[0]
+
+
+//Begin NetGUI[0]
+{
+load_file("netbild.hoc")
+}
+{ocbox_ = new NetGUI(1)}
+{object_push(ocbox_)}
+{mapold2new = new Vector()  missing = new List()}
+original_type("FDSIntFire")
+newnode(0, -9, 34)
+{create_ = 1  create1()}
+{g.size(-166.667,166.667,-123.953,123.953)}
+{set_alias(0)}
+{object_pop()}
+{
+ocbox_.map("NetGUI[0]", 0, 438, 528, 327.36)
+}
+objref ocbox_
+//End NetGUI[0]
+
+objectvar scene_vector_[1]
+{doNotify()}

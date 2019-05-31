@@ -1,0 +1,225 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[6]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin ArtCellGUI[0]
+{
+load_file("netbild.hoc")
+}
+ocbox_ = new ArtCellGUI(1)
+{object_push(ocbox_)}
+{
+tobj = new MechanismStandard("NetStim")
+tobj.set("interval", 100, 0)
+tobj.set("number", 200, 0)
+tobj.set("start", 10, 0)
+tobj.set("noise", 0, 0)
+}
+{append(tobj, "Sfast")}
+{
+tobj = new MechanismStandard("NetStim")
+tobj.set("interval", 200, 0)
+tobj.set("number", 200, 0)
+tobj.set("start", 10, 0)
+tobj.set("noise", 0, 0)
+}
+{append(tobj, "Sslow")}
+{object_pop()}
+{
+ocbox_.map("ArtCellGUI[0]", 0, 466, 449.28, 291.84)
+}
+objref ocbox_
+//End ArtCellGUI[0]
+
+{WindowMenu[0].ses_gid(1, 0, 0, "netstuff")}
+
+//Begin NetReadyCellGUI[0]
+{
+load_file("netbild.hoc")
+}
+{ocbox_ = new NetReadyCellGUI(1)}
+{object_push(ocbox_)}
+{tobj = new CellBuild(1)}
+{object_push(tobj)}
+{
+version(1)
+continuous = 0
+}
+{object_push(topol)}
+{
+first = 0
+slist.remove_all()
+sname = "dend"
+objref tobj
+}
+{
+tobj = new CellBuildSection("soma",0, 0, tobj, 0) slist.append(tobj)
+  tobj.position(0,0,15,0) tobj.lx=7.5 tobj.ly=0 tobj.i3d=0
+}
+for i=0, slist.count-1 {slist.object(i).rdses()}
+{object_pop()}
+{
+}
+{object_push(subsets)}
+{first = 0}
+{tobj = new SNList("all") snlist.append(tobj)}
+for i=0,0 tobj.add(bild.topol.slist.object(fscan()))
+0
+{object_pop()}
+{
+}
+{object_push(geom)}
+{
+first = 0
+tobj = new GeoSpec(2)
+tobj.value = 100
+bild.subsets.snlist.object(0).geo.append(tobj)
+set_default()
+}
+{object_pop()}
+{
+{
+save_window_=geom.g
+save_window_.size(-200,200,-150,150)
+geom.g = save_window_
+save_window_.save_name("geom.g")
+}
+}
+{object_push(memb)}
+{first=0}
+{
+tobj = new GeoSpec(0)
+tobj.value = 80
+tobj.set_default()
+tobj = new MStanWrap(tobj, 0)
+bild.subsets.snlist.object(0).ml.append(tobj)
+}
+{
+tobj = new GeoSpec(1)
+tobj.value = 1
+tobj.set_default()
+tobj = new MStanWrap(tobj, 0)
+bild.subsets.snlist.object(0).ml.append(tobj)
+}
+{
+tobj = new MechanismStandard("pas")
+tobj.set("g_pas", 5e-05, 0)
+tobj.set("e_pas", -70, 0)
+tobj = new MStanWrap(tobj, 1)
+bild.subsets.snlist.object(0).ml.append(tobj)
+}
+{object_pop()}
+{
+}
+{object_push(manage)}
+{
+first = 0
+classname = "Cell"
+etop=1 esub=1 egeom=1 emem=1
+itop=1 isub=0 igeom=0 imem=0
+bild.topol.names_off = 0
+bild.topol.circles_off = 0
+}
+{object_pop()}
+{
+cexport()
+}
+{
+save_window_=gtopol
+save_window_.size(-200,200,-150,150)
+gtopol = save_window_
+save_window_.save_name("gtopol")
+}
+{object_pop()}
+stgui = new SynTypeGUI(1)
+{object_push(stgui)}
+{
+tobj = new MechanismStandard("FDSExp2Syn")
+tobj.set("tau1", 1, 0)
+tobj.set("tau2", 2, 0)
+tobj.set("e", 0, 0)
+tobj.set("f", 0.917, 0)
+tobj.set("tau_F", 94, 0)
+tobj.set("d1", 0.416, 0)
+tobj.set("tau_D1", 380, 0)
+tobj.set("d2", 0.975, 0)
+tobj.set("tau_D2", 9200, 0)
+}
+{append(tobj, "Ea")}
+{
+tobj = new MechanismStandard("FDSExp2Syn")
+tobj.set("tau1", 1, 0)
+tobj.set("tau2", 2, 0)
+tobj.set("e", 0, 0)
+tobj.set("f", 0.917, 0)
+tobj.set("tau_F", 94, 0)
+tobj.set("d1", 0.416, 0)
+tobj.set("tau_D1", 380, 0)
+tobj.set("d2", 0.975, 0)
+tobj.set("tau_D2", 9200, 0)
+}
+{append(tobj, "Eb")}
+{
+tobj = new MechanismStandard("FDSExp2Syn")
+tobj.set("tau1", 1, 0)
+tobj.set("tau2", 2, 0)
+tobj.set("e", 0, 0)
+tobj.set("f", 0.917, 0)
+tobj.set("tau_F", 94, 0)
+tobj.set("d1", 0.416, 0)
+tobj.set("tau_D1", 380, 0)
+tobj.set("d2", 0.975, 0)
+tobj.set("tau_D2", 9200, 0)
+}
+{append(tobj, "Eab")}
+{object_pop()}
+nrc = new NetReadyCell(tobj, stgui.stypelist)
+nrc.name = "C"
+tobj = nrc.cb.topol.slist.object(0)
+{nrc.synlist.append(new SynTypeInstance(nrc.stype.object[0],tobj,0.5,0.5,-1))}
+tobj = nrc.cb.topol.slist.object(0)
+{nrc.synlist.append(new SynTypeInstance(nrc.stype.object[1],tobj,0.5,0.5,2))}
+tobj = nrc.cb.topol.slist.object(0)
+{nrc.synlist.append(new SynTypeInstance(nrc.stype.object[2],tobj,0.5,0.5,3))}
+{g.size(-166.875,166.875,-125.208,125.208)}
+{object_pop()}
+{
+ocbox_.map("NetReadyCellGUI[0]", 0, 61, 404.16, 361.92)
+}
+objref ocbox_
+//End NetReadyCellGUI[0]
+
+{WindowMenu[0].ses_gid(0, 0, 0, "netstuff")}
+
+//Begin NetGUI[0]
+{
+load_file("netbild.hoc")
+}
+{ocbox_ = new NetGUI(1)}
+{object_push(ocbox_)}
+{mapold2new = new Vector()  missing = new List()}
+original_type("C")
+original_type("Sfast")
+original_type("Sslow")
+newnode(0, -62, 35)
+newnode(1, -126, 37)
+newnode(2, 10, 36)
+newedge(1, 0, 0, 0.0001, 1)
+newedge(1, 0, 2, 0.0001, 1)
+newedge(2, 0, 1, 0.0001, 51)
+newedge(2, 0, 2, 0.0001, 51)
+// fix for 5.0.1
+// create1()
+{create_ = 1  create1()}
+{g.size(-166.667,166.667,-124.997,124.997)}
+{object_pop()}
+{
+ocbox_.map("NetGUI[0]", 0, 649, 528, 327.36)
+}
+objref ocbox_
+//End NetGUI[0]
+
+{WindowMenu[0].ses_gid(0, 0, 0, "netstuff")}
+objectvar scene_vector_[1]
+{doNotify()}

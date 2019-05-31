@@ -1,0 +1,66 @@
+load_file("nrngui.hoc")
+
+objref menubox
+
+proc run_fig3a() {
+	load_file("initf3a.hoc")
+	menubox.unmap()
+}
+
+proc run_fig3c() {
+	load_file("initf3c.hoc")
+	menubox.unmap()
+}
+
+proc run_fig3d() {
+	load_file("initf3d.hoc")
+	menubox.unmap()
+}
+
+proc run_fig3e() {
+	load_file("initf3e.hoc")
+	menubox.unmap()
+}
+
+proc run_art() {
+	load_file("initart.hoc")
+	menubox.unmap()
+}
+
+proc run_cel() {
+	load_file("initcel.hoc")
+	menubox.unmap()
+}
+
+proc run_cel2() {
+	load_file("initcel2.hoc")
+	menubox.unmap()
+}
+
+proc run_test() {
+	load_file("inittest.hoc")
+	menubox.unmap()
+}
+
+proc make_demopanel() {
+	menubox = new VBox()
+	menubox.intercept(1)       //all following creations go into the "vbox" box
+	xpanel("Short-term synaptic plasticity")
+	xlabel("Models of short-term synaptic plasticity")
+	xlabel("Choose one of the following:")
+	xbutton("Fig. 3A using slow epsp", "run_fig3a()")
+	xbutton("Fig. 3C using slow epsp", "run_fig3c()")
+	xbutton("Fig. 3D using fast epsp", "run_fig3d()")
+	xbutton("Fig. 3E", "run_fig3e()")
+	xlabel("Other demos just for fun:")
+	xbutton("Artificial (integrate and fire) cell", "run_art()")
+	xbutton("'Biophysical' cell with fast epsp", "run_cel()")
+	xbutton("'Biophysical' cell with slow epsp", "run_cel2()")
+	xbutton("'Biophysical' cell with multiple input streams", "run_test()")
+	xpanel()
+	menubox.intercept(0)       //ends intercept mode
+	menubox.map()              //draw the box and its contents
+}
+
+make_demopanel()
+

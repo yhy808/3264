@@ -1,0 +1,30 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[9]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin NetGUI[0]
+{
+load_file("netbild.hoc")
+}
+{ocbox_ = new NetGUI(1)}
+{object_push(ocbox_)}
+{mapold2new = new Vector()  missing = new List()}
+original_type("Cell")
+original_type("Pre")
+newnode(0, -60, 37)
+newnode(1, -131, 39)
+newedge(1, 0, 0, 0.001, 20)
+{create_ = 1  create1()}
+{g.size(-166.667,166.667,-123.953,123.953)}
+{set_alias(0)}
+{object_pop()}
+{
+ocbox_.map("NetGUI[0]", 6, 677, 528, 327.36)
+}
+objref ocbox_
+//End NetGUI[0]
+
+{WindowMenu[0].ses_gid(1, 2, 1, "netstuff")}
+objectvar scene_vector_[1]
+{doNotify()}

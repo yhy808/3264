@@ -1,0 +1,29 @@
+objectvar save_window_, rvp_
+objectvar scene_vector_[6]
+objectvar ocbox_, ocbox_list_, scene_, scene_list_
+{ocbox_list_ = new List()  scene_list_ = new List()}
+
+//Begin Grapher
+{
+load_file("grapher.hoc")}
+{
+ocbox_=new Grapher(1)
+
+ocbox_.info("t","t", "", 0, 30000, 0.97, 1, 100, 0, 30000)
+{
+save_window_=ocbox_.g
+save_window_.size(0,30000,0.97,1)
+ocbox_.g = save_window_
+save_window_.save_name("ocbox_.g")
+save_window_.xexpr("t", 0)
+save_window_.addexpr("FDSIntFire[0].D2val(FDSIntFire[0].d2, t)", 1, 1, 0.157828, 0.339969, 2)
+save_window_.label(0.121406, 0.828082, "Slow Depression", 2, 1, 0, 0, 1)
+}
+ocbox_ = ocbox_.vbox
+ocbox_.map("Grapher", 779, 83, 308.16, 453.12)
+}
+objref ocbox_
+//End Grapher
+
+objectvar scene_vector_[1]
+{doNotify()}
