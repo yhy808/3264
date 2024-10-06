@@ -1,12 +1,12 @@
 ## Implementations of short-term synaptic plasticity for NEURON.
 
-- This archive contains 3 mod files that implement the short term 
+This archive contains 3 mod files that implement the short term 
 synaptic plasticity model described in
   Varela, J.A., Sen, K., Gibson, J., Fost, J., Abbott, L.R., 
   and Nelson, S.B.. 
   A quantitative description of short-term plasticity at 
   excitatory synapses in layer 2/3 of rat primary visual cortex.
-  Journal of Neuroscience 17:7926-7940, 1997.
+  *Journal of Neuroscience* 17:7926-7940, 1997.
 
 - fdsintf.mod is an integrate & fire cell.
 
@@ -36,3 +36,7 @@ of NEURON.
 
 Contact ted.carnevale@yale.edu if you have questions about 
 this implementation of the model described by Varela et al..
+
+Changelog:
+----------
+2024-10: Converted readme to markdown
